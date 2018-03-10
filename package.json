@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@types/isomorphic-fetch": "^0.0.34",
+    "@types/lodash": "^4.14.104",
     "@types/react-redux": "^5.0.15",
     "@types/react-router-dom": "^4.2.4",
     "@types/redux-logger": "^3.0.5",
@@ -20,6 +21,7 @@
     "html-webpack-plugin": "2.29.0",
     "isomorphic-fetch": "^2.2.1",
     "jest": "20.0.4",
+    "lodash": "^4.17.5",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",

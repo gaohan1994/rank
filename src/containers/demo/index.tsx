@@ -4,6 +4,7 @@ import DemoClass from '../../components/Demo';
 import { Stores } from '../../types/index';
 import { connect, Dispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { getTest, getProducts } from '../../reducers/demo';
 
 export interface Props {
     test: number;
@@ -38,17 +39,15 @@ class DemoContainer extends React.Component<Props, {}> {
     }
 }
 
-export function mapStateToProps({demo: {test, products}}: Stores) {
-    return {
-        test    : test,
-        products: products,
-    };
-}
+export const mapStateToProps = (state: Stores) => ({
+    test    : getTest(state),
+    products: getProducts(state),
+});
 
 export const mapDispatchToProps = (dispatch: Dispatch<DemoActions>) => ({
-    incrementDemo: bindActionCreators(incrementDemo, dispatch),
-    decrementDemo: bindActionCreators(decrementDemo, dispatch),
-    receiveProducts: bindActionCreators(receiveProducts, dispatch),
+    incrementDemo   : bindActionCreators(incrementDemo, dispatch),
+    decrementDemo   : bindActionCreators(decrementDemo, dispatch),
+    receiveProducts : bindActionCreators(receiveProducts, dispatch),
 });
 
 export const mergeProps = (stateProps: Object, dispatchProps: Object, ownProps: Object) => 
