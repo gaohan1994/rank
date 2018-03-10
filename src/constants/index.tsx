@@ -9,3 +9,6 @@ export type INCREMENT_DEMO = typeof INCREMENT_DEMO;
 
 export const DECREMENT_DEMO = 'DECREMENT_DEMO';
 export type DECREMENT_DEMO = typeof DECREMENT_DEMO;
+
+export const RECEIVE_PRODUCTS = 'RECEIVE_PRODUCTS';
+export type RECEIVE_PRODUCTS = typeof RECEIVE_PRODUCTS;

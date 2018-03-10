@@ -1,16 +1,54 @@
-import * as actions from '../../actions/';
+import * as React from 'react';
+import { incrementDemo, decrementDemo, DemoActions, receiveProducts } from '../../actions/demo';
 import DemoClass from '../../components/Demo';
 import { Stores } from '../../types/index';
 import { connect, Dispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-export function mapStateToProps({demo: {test}}: Stores) {
+export interface Props {
+    test: number;
+    incrementDemo: () => void;
+    decrementDemo: () => void;
+    receiveProducts: () => {};
+    products: [{
+        id: string;
+        name: string;
+        price: number;
+        manufacturer: string;
+    }];
+}
+
+class DemoContainer extends React.Component<Props, {}> {
+
+    componentDidMount() {
+        const { receiveProducts} = this.props;
+        receiveProducts();
+    }
+
+    render() {
+        const { test, products, incrementDemo, decrementDemo } = this.props;
+        return (
+            <DemoClass
+                test={test}
+                products={products}
+                incrementDemo={incrementDemo}
+                decrementDemo={decrementDemo}
+            />
+        );
+    }
+}
+
+export function mapStateToProps({demo: {test, products}}: Stores) {
     return {
-        test,
+        test    : test,
+        products: products,
     };
 }
 
-export const mapDispatchToProps = (dispatch: Dispatch<actions.NumberAction>) => ({
-    
+export const mapDispatchToProps = (dispatch: Dispatch<DemoActions>) => ({
+    incrementDemo: bindActionCreators(incrementDemo, dispatch),
+    decrementDemo: bindActionCreators(decrementDemo, dispatch),
+    receiveProducts: bindActionCreators(receiveProducts, dispatch),
 });
 
 export const mergeProps = (stateProps: Object, dispatchProps: Object, ownProps: Object) => 
@@ -20,4 +58,4 @@ export default connect(
     mapStateToProps, 
     mapDispatchToProps,
     mergeProps
-)(DemoClass);
+)(DemoContainer);

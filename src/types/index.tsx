@@ -9,4 +9,5 @@ export interface Stores {
 
 export interface Demo {
     test: number;
+    products: Array<Object>;
 }
