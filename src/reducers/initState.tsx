@@ -1,6 +1,6 @@
 export default {
     demo: {
-        test: 1,
+        test: 0,
         products: [],
     }
 };
