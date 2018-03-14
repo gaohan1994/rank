@@ -27,7 +27,6 @@ class DemoClass extends React.Component<Props, {}> {
                 <p onClick={decrementDemo}>-</p>
                 {this.renderProducts()}
             </div>
-            
         );
     }
 
