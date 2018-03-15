@@ -1,10 +1,6 @@
-export interface StoreState {
-    languageName: string;
-    testNumber: number;
-}
-
 export interface Stores {
     demo: Demo;
+    match: Match;
 }
 
 export interface Demo {
@@ -19,7 +15,12 @@ export type PlayerType = {
 };
 
 export type MatchType = {
+    _id: string;
     date: Date;
     players: Array<PlayerType>;
     winner: number;
+};
+
+export type Match = {
+    matches: Array<Object>;
 };

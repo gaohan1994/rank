@@ -9,13 +9,13 @@ const configureStore = () => {
         ? createStore(
             rootReducer,
             compose(
-                applyMiddleware(thunk, createLogger)
+                applyMiddleware(thunk)
             )
         )
         : createStore(
             rootReducer,
             compose(
-                applyMiddleware(thunk)
+                applyMiddleware(thunk, createLogger)
             )
         );
         

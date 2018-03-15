@@ -1,0 +1,10 @@
+.container {
+    width: 400px;
+    height: 200px;
+    background: #dddddd;
+}
+
+.match {
+    width: 400px;
+    height: 200px;
+}

@@ -4,6 +4,7 @@ const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const typingsForCssModulesLoader = require('typings-for-css-modules-loader');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
@@ -166,7 +167,8 @@ module.exports = {
               {
                 loader: require.resolve('css-loader'),
                 options: {
-                  importLoaders: 1,
+                  // importLoaders: 1,
+                  localIdentName: '[path][name]__[local]--[hash:base64:5]'
                 },
               },
               {
@@ -189,6 +191,9 @@ module.exports = {
                   ],
                 },
               },
+              // {
+              //   loader: require.resolve('typings-for-css-modules-loader'),
+              // }
             ],
           },
           // "file" loader makes sure those assets get served by WebpackDevServer.
