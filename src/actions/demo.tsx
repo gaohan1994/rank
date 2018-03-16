@@ -1,3 +1,4 @@
+// require<any>('es6-promise').polyfill();
 require('es6-promise').polyfill();
 import * as fetch from 'isomorphic-fetch';
 import * as constants from '../constants/index';

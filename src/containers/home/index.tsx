@@ -44,7 +44,6 @@ class Home extends React.Component<Props, State> {
         return (
             <div>
                 {this._renderMatches()}
-                123
                 <Player/>
             </div>
         );

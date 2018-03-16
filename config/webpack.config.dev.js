@@ -109,7 +109,7 @@ module.exports = {
       // please link the files into your node_modules/ and let module-resolution kick in.
       // Make sure your source files are compiled, as they will not be processed in any way.
       new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
-      new TsconfigPathsPlugin({configFile: paths.appTsConfig})
+      new TsconfigPathsPlugin({configFile: paths.appTsConfig}),
     ],
   },
   module: {
@@ -164,12 +164,55 @@ module.exports = {
             test: /\.css$/,
             use: [
               require.resolve('style-loader'),
-              {
-                loader: require.resolve('css-loader'),
+              { 
+                loader: require.resolve('typings-for-css-modules-loader'),
                 options: {
-                  // importLoaders: 1,
-                  localIdentName: '[path][name]__[local]--[hash:base64:5]'
-                },
+                  namedExport: true,
+                  camelCase: true,
+                  modules: true,
+                }
+              },
+              // {
+              //   loader: require.resolve('css-loader'),
+              //   options: {
+              //     // modules: true,
+              //     importLoaders: 1,
+              //     camelCase: true,
+              //     localIdentName: '[name]_[local]_[hash:base64:5]'
+              //   },
+              // },
+              {
+                loader: require.resolve('postcss-loader'),
+                options: {
+                  // Necessary for external CSS imports to work
+                  // https://github.com/facebookincubator/create-react-app/issues/2677
+                  ident: 'postcss',
+                  plugins: () => [
+                    require('postcss-flexbugs-fixes'),
+                    autoprefixer({
+                      browsers: [
+                        '>1%',
+                        'last 4 versions',
+                        'Firefox ESR',
+                        'not ie < 9', // React doesn't support IE8 anyway
+                      ],
+                      flexbox: 'no-2009',
+                    }),
+                  ],
+                }
+              }
+            ],
+          },
+          {
+            test: /\.scss$/,
+            use: [{ 
+                loader: require.resolve('typings-for-css-modules-loader'),
+                options: {
+                  namedExport: true,
+                  camelCase: true,
+                  modules: true,
+                  sass: true
+                }
               },
               {
                 loader: require.resolve('postcss-loader'),
@@ -189,10 +232,10 @@ module.exports = {
                       flexbox: 'no-2009',
                     }),
                   ],
-                },
+                }
               },
               // {
-              //   loader: require.resolve('typings-for-css-modules-loader'),
+              //   loader: require.resolve('sass-loader')
               // }
             ],
           },
@@ -251,6 +294,13 @@ module.exports = {
     // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
     // You can remove this if you don't use Moment.js:
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+
+    //maybe should added into production config
+    // new webpack.WatchIgnorePlugin([
+    //   /css\.d\.ts$/,
+    //   /sass\.d\.ts$/,
+    // ]),
+
     // Perform type checking and linting in a separate process to speed up compilation
     new ForkTsCheckerWebpackPlugin({
       async: false,
