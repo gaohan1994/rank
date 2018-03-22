@@ -163,24 +163,29 @@ module.exports = {
           {
             test: /\.css$/,
             use: [
-              require.resolve('style-loader'),
-              { 
-                loader: require.resolve('typings-for-css-modules-loader'),
+              {
+                loader: require.resolve('style-loader'),
                 options: {
-                  namedExport: true,
-                  camelCase: true,
-                  modules: true,
+                  modules:  true
                 }
               },
-              // {
-              //   loader: require.resolve('css-loader'),
+              // { 
+              //   loader: require.resolve('typings-for-css-modules-loader'),
               //   options: {
-              //     // modules: true,
-              //     importLoaders: 1,
+              //     namedExport: true,
               //     camelCase: true,
-              //     localIdentName: '[name]_[local]_[hash:base64:5]'
-              //   },
+              //     modules: true,
+              //   }
               // },
+              {
+                loader: require.resolve('css-loader'),
+                options: {
+                  modules: true,
+                  importLoaders: 1,
+                  camelCase: true,
+                  localIdentName: '[name]_[local]_[hash:base64:5]'
+                },
+              },
               {
                 loader: require.resolve('postcss-loader'),
                 options: {

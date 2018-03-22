@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { MatchType } from '../../types/index';
 // import * as styles from './styles.css';
+import * as CSSModule from 'react-css-modules';
 import * as styles from './styles.css';
 
 interface Props {
@@ -20,11 +21,13 @@ class Match extends React.Component<Props, State> {
     render() {
         const { data } = this.props;
         return (
-            <div className={styles.container}>
+            <div styleName="container">
                 {data.players.map(item => item.name + '-')}
             </div>
         );
     }
 }
 
-export default Match;
+const MatchHoc = CSSModule(Match, styles);
+
+export default MatchHoc;

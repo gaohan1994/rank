@@ -30,7 +30,6 @@ class Home extends React.Component<Props, State> {
 
     _renderMatches = () => {
         const { matches } = this.props;
-        console.log('matches', matches);
         const result = matches.map((item: MatchType) => (
             <Match 
                 key={item._id}
